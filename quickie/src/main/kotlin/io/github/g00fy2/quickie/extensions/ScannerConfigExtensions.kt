@@ -13,5 +13,5 @@ internal fun ScannerConfig.toParcelableConfig() =
     horizontalFrameRatio = horizontalFrameRatio,
     useFrontCamera = useFrontCamera,
     showCloseButton = showCloseButton,
-    onFileOpenClick = onFileOpenClick
+    scanFromFile = scanFromFile
   )

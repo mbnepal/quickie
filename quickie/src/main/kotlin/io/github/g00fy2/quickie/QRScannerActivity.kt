@@ -102,7 +102,9 @@ internal class QRScannerActivity : AppCompatActivity() {
       val preview = Preview.Builder().build().also { it.setSurfaceProvider(binding.previewView.surfaceProvider) }
       val imageAnalysis = ImageAnalysis.Builder().setTargetResolution(Size(1280, 720)).build().also {
         it.setAnalyzer(
-          analysisExecutor, QRCodeAnalyzer(barcodeFormats = barcodeFormats,
+          analysisExecutor,
+          QRCodeAnalyzer(
+            barcodeFormats = barcodeFormats,
             onSuccess = { barcode ->
               it.clearAnalyzer()
               onSuccess(barcode)
@@ -178,20 +180,17 @@ internal class QRScannerActivity : AppCompatActivity() {
       useFrontCamera = it.useFrontCamera
       showCloseButton = it.showCloseButton
 
-      if (it.onFileOpenClick == null) {
-        binding.fileOpenView.visibility = View.GONE
-      } else {
+      if (it.scanFromFile) {
         binding.fileOpenView.visibility = View.VISIBLE
+      } else {
+        binding.fileOpenView.visibility = View.GONE
       }
 
       binding.fileOpenView.setOnClickListener { _ ->
-        if (it.onFileOpenClick?.invoke() == true) {
-          finish()
-        }
+        setResult(RESULT_SCAN_FROM_FILE)
+        finish()
       }
     }
-
-
   }
 
   private fun requestCameraPermissionIfMissing(onResult: ((Boolean) -> Unit)) {
@@ -211,5 +210,6 @@ internal class QRScannerActivity : AppCompatActivity() {
     const val EXTRA_RESULT_EXCEPTION = "quickie-exception"
     const val RESULT_MISSING_PERMISSION = RESULT_FIRST_USER + 1
     const val RESULT_ERROR = RESULT_FIRST_USER + 2
+    const val RESULT_SCAN_FROM_FILE = RESULT_FIRST_USER + 3
   }
 }

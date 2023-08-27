@@ -1,9 +1,7 @@
 package io.github.g00fy2.quickie.config
 
 import android.os.Parcelable
-import io.github.g00fy2.quickie.SerializableFunction
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
 
 @Parcelize
 internal class ParcelableScannerConfig(
@@ -15,6 +13,5 @@ internal class ParcelableScannerConfig(
   val horizontalFrameRatio: Float,
   val useFrontCamera: Boolean,
   val showCloseButton: Boolean,
-  val onFileOpenClick: SerializableFunction?
+  val scanFromFile: Boolean
 ) : Parcelable
-

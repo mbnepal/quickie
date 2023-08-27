@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +15,6 @@ import io.github.g00fy2.quickie.QRResult.QRSuccess
 import io.github.g00fy2.quickie.QRResult.QRUserCanceled
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.ScanQRCode
-import io.github.g00fy2.quickie.SerializableFunction
 import io.github.g00fy2.quickie.config.BarcodeFormat
 import io.github.g00fy2.quickie.config.ScannerConfig
 import io.github.g00fy2.quickie.content.QRContent
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         setShowCloseButton(true) // show or hide (default) close button
         setHorizontalFrameRatio(1f) // set the horizontal overlay ratio (default is 1 / square frame)
         setUseFrontCamera(false) // use the front camera
-        setFileOpenListener(null)
+        setScanFromFile(false)
       })
     }
 
@@ -66,6 +64,7 @@ class MainActivity : AppCompatActivity() {
       }
       QRUserCanceled -> "User canceled"
       QRMissingPermission -> "Missing permission"
+      QRResult.QRFromFileRequest -> "Scan from file."
       is QRError -> "${result.exception.javaClass.simpleName}: ${result.exception.localizedMessage}"
     }
 

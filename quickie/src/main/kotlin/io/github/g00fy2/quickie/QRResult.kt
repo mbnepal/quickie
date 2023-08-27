@@ -27,4 +27,9 @@ public sealed class QRResult {
    * @property exception the cause why the Activity was finished.
    */
   public data class QRError internal constructor(val exception: Exception) : QRResult()
+
+  /**
+   * User requested the qr be scanned from a file instead.
+   */
+  public object QRFromFileRequest : QRResult()
 }

@@ -38,7 +38,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:importantForAccessibility="no"
-        android:src="@drawable/open_file"
+        android:src="@drawable/quickie_open_file"
         app:tint="@color/quickie_gray"
         />
 
