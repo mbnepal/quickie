@@ -100,23 +100,17 @@ internal class QRScannerActivity : AppCompatActivity() {
       }
 
       val preview = Preview.Builder().build().also { it.setSurfaceProvider(binding.previewView.surfaceProvider) }
-      val imageAnalysis = ImageAnalysis.Builder()
-        .setTargetResolution(Size(1280, 720))
-        .build()
-        .also {
-          it.setAnalyzer(
-            analysisExecutor,
-            QRCodeAnalyzer(
-              barcodeFormats = barcodeFormats,
-              onSuccess = { barcode ->
-                it.clearAnalyzer()
-                onSuccess(barcode)
-              },
-              onFailure = { exception -> onFailure(exception) },
-              onPassCompleted = { failureOccurred -> onPassCompleted(failureOccurred) }
-            )
-          )
-        }
+      val imageAnalysis = ImageAnalysis.Builder().setTargetResolution(Size(1280, 720)).build().also {
+        it.setAnalyzer(
+          analysisExecutor, QRCodeAnalyzer(barcodeFormats = barcodeFormats,
+            onSuccess = { barcode ->
+              it.clearAnalyzer()
+              onSuccess(barcode)
+            },
+            onFailure = { exception -> onFailure(exception) },
+            onPassCompleted = { failureOccurred -> onPassCompleted(failureOccurred) })
+        )
+      }
 
       cameraProvider.unbindAll()
 
@@ -143,19 +137,16 @@ internal class QRScannerActivity : AppCompatActivity() {
   private fun onSuccess(result: Barcode) {
     binding.overlayView.isHighlighted = true
     if (hapticFeedback) {
-      @Suppress("DEPRECATION")
-      val flags = HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING or HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+      @Suppress("DEPRECATION") val flags =
+        HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING or HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
       binding.overlayView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, flags)
     }
-    setResult(
-      Activity.RESULT_OK,
-      Intent().apply {
-        putExtra(EXTRA_RESULT_BYTES, result.rawBytes)
-        putExtra(EXTRA_RESULT_VALUE, result.rawValue)
-        putExtra(EXTRA_RESULT_TYPE, result.valueType)
-        putExtra(EXTRA_RESULT_PARCELABLE, result.toParcelableContentType())
-      }
-    )
+    setResult(Activity.RESULT_OK, Intent().apply {
+      putExtra(EXTRA_RESULT_BYTES, result.rawBytes)
+      putExtra(EXTRA_RESULT_VALUE, result.rawValue)
+      putExtra(EXTRA_RESULT_TYPE, result.valueType)
+      putExtra(EXTRA_RESULT_PARCELABLE, result.toParcelableContentType())
+    })
     finish()
   }
 
@@ -186,7 +177,21 @@ internal class QRScannerActivity : AppCompatActivity() {
       showTorchToggle = it.showTorchToggle
       useFrontCamera = it.useFrontCamera
       showCloseButton = it.showCloseButton
+
+      if (it.onFileOpenClick == null) {
+        binding.fileOpenView.visibility = View.GONE
+      } else {
+        binding.fileOpenView.visibility = View.VISIBLE
+      }
+
+      binding.fileOpenView.setOnClickListener { _ ->
+        if (it.onFileOpenClick?.invoke() == true) {
+          finish()
+        }
+      }
     }
+
+
   }
 
   private fun requestCameraPermissionIfMissing(onResult: ((Boolean) -> Unit)) {

@@ -16,10 +16,10 @@
       android:ellipsize="end"
       android:gravity="center"
       android:maxLines="2"
-      android:paddingBottom="8dp"
-      android:paddingEnd="24dp"
       android:paddingStart="24dp"
       android:paddingTop="8dp"
+      android:paddingEnd="24dp"
+      android:paddingBottom="8dp"
       android:text="@string/quickie_scan_qr_code"
       android:textAppearance="@style/TextAppearance.AppCompat.Headline"
       android:textColor="@color/quickie_white"
@@ -67,24 +67,27 @@
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:indeterminateTintMode="src_in"
         android:indeterminateTint="@color/quickie_gray"
+        android:indeterminateTintMode="src_in"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingEnd="24dp"
         android:paddingStart="24dp"
         android:paddingTop="4dp"
+        android:paddingEnd="24dp"
         android:text="@string/quickie_please_wait"
         android:textColor="@color/quickie_gray"
-        style="@style/TextAppearance.AppCompat.Subhead"
         />
   </LinearLayout>
+
+
+
 
 </merge>

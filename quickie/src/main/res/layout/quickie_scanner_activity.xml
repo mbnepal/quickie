@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,4 +21,35 @@
       android:visibility="invisible"
       tools:visibility="visible"
       />
+
+  <LinearLayout
+      android:id="@+id/file_open_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom|end"
+      android:layout_marginEnd="24dp"
+      android:layout_marginBottom="80dp"
+      android:gravity="center"
+      android:orientation="horizontal"
+      tools:ignore="UseCompoundDrawables"
+      >
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/open_file"
+        app:tint="@color/quickie_gray"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="Scan QR from file"
+        android:textColor="@color/quickie_gray"
+        android:textSize="18sp"/>
+  </LinearLayout>
 </FrameLayout>

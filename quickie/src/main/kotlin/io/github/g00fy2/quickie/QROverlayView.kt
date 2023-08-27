@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode
 import android.graphics.RectF
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +27,7 @@ import kotlin.math.roundToInt
 
 @Suppress("TooManyFunctions")
 internal class QROverlayView @JvmOverloads constructor(
-  context: Context,
-  attrs: AttributeSet? = null,
-  defStyleAttr: Int = 0
+  context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
   private val binding = QuickieOverlayViewBinding.inflate(LayoutInflater.from(context), this)
@@ -212,8 +211,7 @@ internal class QROverlayView @JvmOverloads constructor(
     }
   }
 
-  private fun Float.toPx() =
-    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics)
+  private fun Float.toPx() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this, resources.displayMetrics)
 
   companion object {
     private const val BACKGROUND_ALPHA = 0.77 * 255

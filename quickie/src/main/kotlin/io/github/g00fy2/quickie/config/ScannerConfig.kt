@@ -2,6 +2,7 @@ package io.github.g00fy2.quickie.config
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import io.github.g00fy2.quickie.SerializableFunction
 
 /**
  * Builder for ScannerConfig used in ScanBarcode ActivityResultContract.
@@ -16,6 +17,7 @@ public class ScannerConfig internal constructor(
   internal val horizontalFrameRatio: Float,
   internal val useFrontCamera: Boolean,
   internal val showCloseButton: Boolean,
+  internal val onFileOpenClick: SerializableFunction?
 ) {
 
   public class Builder {
@@ -27,6 +29,7 @@ public class ScannerConfig internal constructor(
     private var horizontalFrameRatio: Float = 1f
     private var useFrontCamera: Boolean = false
     private var showCloseButton: Boolean = false
+    private var onFileOpenClick: SerializableFunction? = null
 
     /**
      * Set a list of interested barcode formats. List must not be empty.
@@ -70,6 +73,7 @@ public class ScannerConfig internal constructor(
      * Show or hide (default) close button.
      */
     public fun setShowCloseButton(enable: Boolean): Builder = apply { showCloseButton = enable }
+    public fun setFileOpenListener(serializableFunction: SerializableFunction?): Builder = apply { onFileOpenClick = serializableFunction }
 
     /**
      * Build the BarcodeConfig required by the ScanBarcode ActivityResultContract.
@@ -84,6 +88,7 @@ public class ScannerConfig internal constructor(
         horizontalFrameRatio,
         useFrontCamera,
         showCloseButton,
+        onFileOpenClick
       )
   }
 

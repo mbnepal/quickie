@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import io.github.g00fy2.quickie.QRResult.QRSuccess
 import io.github.g00fy2.quickie.QRResult.QRUserCanceled
 import io.github.g00fy2.quickie.ScanCustomCode
 import io.github.g00fy2.quickie.ScanQRCode
+import io.github.g00fy2.quickie.SerializableFunction
 import io.github.g00fy2.quickie.config.BarcodeFormat
 import io.github.g00fy2.quickie.config.ScannerConfig
 import io.github.g00fy2.quickie.content.QRContent
@@ -39,18 +41,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     binding.customScannerButton.setOnClickListener {
-      scanCustomCode.launch(
-        ScannerConfig.build {
-          setBarcodeFormats(listOf(selectedBarcodeFormat)) // set interested barcode formats
-          setOverlayStringRes(R.string.scan_barcode) // string resource used for the scanner overlay
-          setOverlayDrawableRes(R.drawable.ic_scan_barcode) // drawable resource used for the scanner overlay
-          setHapticSuccessFeedback(false) // enable (default) or disable haptic feedback when a barcode was detected
-          setShowTorchToggle(true) // show or hide (default) torch/flashlight toggle button
-          setShowCloseButton(true) // show or hide (default) close button
-          setHorizontalFrameRatio(2.2f) // set the horizontal overlay ratio (default is 1 / square frame)
-          setUseFrontCamera(false) // use the front camera
-        }
-      )
+      scanCustomCode.launch(ScannerConfig.build {
+        setBarcodeFormats(listOf(selectedBarcodeFormat)) // set interested barcode formats
+        setOverlayStringRes(R.string.scan_barcode) // string resource used for the scanner overlay
+        setOverlayDrawableRes(R.drawable.ic_scan_barcode) // drawable resource used for the scanner overlay
+        setHapticSuccessFeedback(false) // enable (default) or disable haptic feedback when a barcode was detected
+        setShowTorchToggle(true) // show or hide (default) torch/flashlight toggle button
+        setShowCloseButton(true) // show or hide (default) close button
+        setHorizontalFrameRatio(1f) // set the horizontal overlay ratio (default is 1 / square frame)
+        setUseFrontCamera(false) // use the front camera
+        setFileOpenListener(null)
+      })
     }
 
     if (intent.extras?.getBoolean(OPEN_SCANNER) == true) scanQrCode.launch(null)
