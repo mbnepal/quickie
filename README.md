@@ -1,14 +1,11 @@
-<p align="center">
-  <img width="345" height="120" src="https://raw.githubusercontent.com/G00fY2/quickie/gh-pages/media/logo.png">
-</p>
+![quickie logo](https://raw.githubusercontent.com/G00fY2/quickie/gh-pages/media/logo_dark.svg#gh-dark-mode-only)
+![quickie logo](https://raw.githubusercontent.com/G00fY2/quickie/gh-pages/media/logo_light.svg#gh-light-mode-only)
 
 **quickie** is a Quick Response (QR) Code scanning library for Android that is based on CameraX and ML Kit on-device barcode detection. It's an alternative to ZXing based libraries and written in Kotlin. **quickie** features:
 - Easy API for launching the QR scanner and receiving results by using the new Activity Result API
 - Modern design, edge-to-edge scanning view with multilingual user hint
 - Android Jetpack CameraX for communicating with the camera and showing the preview
 - ML Kit Vision API for best, fully on-device barcode recognition and decoding
-
-> **Note**: At Google I/O 2022 the [Google code scanner](https://developers.google.com/ml-kit/code-scanner) was announced. You should consider using it instead of quickie unbundled. If you want to support devices without Play Services or like to ship the latest ML Kit model - use quickie bundled.
 
 ## Download [![Maven Central](https://img.shields.io/maven-central/v/io.github.g00fy2.quickie/quickie-unbundled)](https://search.maven.org/search?q=g:io.github.g00fy2.quickie)
 There are two different flavors available on `mavenCentral()`:
@@ -21,10 +18,10 @@ There are two different flavors available on `mavenCentral()`:
 
 ```kotlin
 // bundled:  
-implementation("io.github.g00fy2.quickie:quickie-bundled:1.8.0")
+implementation("io.github.g00fy2.quickie:quickie-bundled:1.9.0")
 
 // unbundled:
-implementation("io.github.g00fy2.quickie:quickie-unbundled:1.8.0")
+implementation("io.github.g00fy2.quickie:quickie-unbundled:1.9.0")
 ```
 
 ## Quick Start
@@ -127,7 +124,8 @@ override fun onCreate(savedInstanceState: Bundle?) {
 fun handleResult(result: QRResult) {
     …
 ```
-> **Note**: You can optionally [pass in an ActivityOptionsCompat object](https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher#launch(I,%20androidx.core.app.ActivityOptionsCompat)) when launching the ActivityResultLauncher to control the scanner launch animation.
+> [!TIP]
+> You can optionally [pass in an ActivityOptionsCompat object](https://developer.android.com/reference/androidx/activity/result/ActivityResultLauncher#launch(I,%20androidx.core.app.ActivityOptionsCompat)) when launching the ActivityResultLauncher to control the scanner launch animation.
 
 ## Screenshots / Sample App
 You can find the sample app APKs inside the [release](https://github.com/G00fY2/quickie/releases) assets.
@@ -140,7 +138,7 @@ You can find the sample app APKs inside the [release](https://github.com/G00fY2/
 * (Google Play Services available on the end device if using `quickie-unbundled`)
 
 ## Contributing
-See [CONTRIBUTING](CONTRIBUTING.md)
+See [CONTRIBUTING](.github/CONTRIBUTING.md)
 
 Thanks to everyone who contributed to quickie!
 
