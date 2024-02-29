@@ -32,4 +32,9 @@ public sealed class QRResult {
    * User requested the qr be scanned from a file instead.
    */
   public object QRFromFileRequest : QRResult()
+
+  /**
+   * User requested to invoke their personal qr action.
+   */
+  public object MyQrAction : QRResult()
 }

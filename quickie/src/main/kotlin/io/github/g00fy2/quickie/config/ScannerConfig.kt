@@ -16,7 +16,8 @@ public class ScannerConfig internal constructor(
   internal val horizontalFrameRatio: Float,
   internal val useFrontCamera: Boolean,
   internal val showCloseButton: Boolean,
-  internal val scanFromFile: Boolean
+  internal val scanFromFile: Boolean,
+  internal val qrActionName: String,
 ) {
 
   public class Builder {
@@ -29,6 +30,7 @@ public class ScannerConfig internal constructor(
     private var useFrontCamera: Boolean = false
     private var showCloseButton: Boolean = false
     private var scanFromFile: Boolean = false
+    private var qrActionName: String= ""
 
     /**
      * Set a list of interested barcode formats. List must not be empty.
@@ -81,6 +83,13 @@ public class ScannerConfig internal constructor(
     }
 
     /**
+     * Invoke custom qr action
+     */
+    public fun setQrActionName(actionName:String): Builder = apply {
+      qrActionName = actionName
+    }
+
+    /**
      * Build the BarcodeConfig required by the ScanBarcode ActivityResultContract.
      */
     public fun build(): ScannerConfig =
@@ -93,7 +102,8 @@ public class ScannerConfig internal constructor(
         horizontalFrameRatio,
         useFrontCamera,
         showCloseButton,
-        scanFromFile
+        scanFromFile,
+        qrActionName
       )
   }
 

@@ -195,13 +195,19 @@ internal class QRScannerActivity : AppCompatActivity() {
 
       if (it.scanFromFile) {
         binding.fileOpenView.visibility = View.VISIBLE
-      } else {
-        binding.fileOpenView.visibility = View.GONE
+        binding.fileOpenView.setOnClickListener { _ ->
+          setResult(RESULT_SCAN_FROM_FILE)
+          finish()
+        }
       }
 
-      binding.fileOpenView.setOnClickListener { _ ->
-        setResult(RESULT_SCAN_FROM_FILE)
-        finish()
+      if (it.myQrActionName.isNotBlank()) {
+        binding.qrTextView.text = it.myQrActionName
+        binding.myQrView.visibility = View.VISIBLE
+        binding.myQrView.setOnClickListener { _ ->
+          setResult(RESULT_MY_QR_ACTION)
+          finish()
+        }
       }
     }
   }
@@ -224,5 +230,6 @@ internal class QRScannerActivity : AppCompatActivity() {
     const val RESULT_MISSING_PERMISSION = RESULT_FIRST_USER + 1
     const val RESULT_ERROR = RESULT_FIRST_USER + 2
     const val RESULT_SCAN_FROM_FILE = RESULT_FIRST_USER + 3
+    const val RESULT_MY_QR_ACTION = RESULT_FIRST_USER + 4
   }
 }

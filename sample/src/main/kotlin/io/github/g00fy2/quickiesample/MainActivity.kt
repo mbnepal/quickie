@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
         setShowCloseButton(true) // show or hide (default) close button
         setHorizontalFrameRatio(1f) // set the horizontal overlay ratio (default is 1 / square frame)
         setUseFrontCamera(false) // use the front camera
-        setScanFromFile(false)
+        setScanFromFile(true)
+        setQrActionName("My QR")
+
       })
     }
 
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
       QRUserCanceled -> "User canceled"
       QRMissingPermission -> "Missing permission"
       QRResult.QRFromFileRequest -> "Scan from file."
+      QRResult.MyQrAction -> "My QR."
       is QRError -> "${result.exception.javaClass.simpleName}: ${result.exception.localizedMessage}"
     }
 

@@ -13,5 +13,6 @@ internal fun ScannerConfig.toParcelableConfig() =
     horizontalFrameRatio = horizontalFrameRatio,
     useFrontCamera = useFrontCamera,
     showCloseButton = showCloseButton,
-    scanFromFile = scanFromFile
+    scanFromFile = scanFromFile,
+    myQrActionName = qrActionName
   )
