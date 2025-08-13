@@ -13,6 +13,7 @@ internal class ParcelableScannerConfig(
   val horizontalFrameRatio: Float,
   val useFrontCamera: Boolean,
   val showCloseButton: Boolean,
+  val keepScreenOn: Boolean,
   val scanFromFile: Boolean,
   val myQrActionName: String
 ) : Parcelable

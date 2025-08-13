@@ -10,6 +10,7 @@ import android.util.Size
 import android.view.HapticFeedbackConstants
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ContextThemeWrapper
@@ -101,7 +102,7 @@ internal class QRScannerActivity : AppCompatActivity() {
         return@addListener
       }
 
-      val preview = Preview.Builder().build().also { it.setSurfaceProvider(binding.previewView.surfaceProvider) }
+      val preview = Preview.Builder().build().also { it.surfaceProvider = binding.previewView.surfaceProvider }
       val imageAnalysis = ImageAnalysis.Builder()
         .setResolutionSelector(
           ResolutionSelector.Builder().setResolutionStrategy(
@@ -152,8 +153,8 @@ internal class QRScannerActivity : AppCompatActivity() {
   private fun onSuccess(result: Barcode) {
     binding.overlayView.isHighlighted = true
     if (hapticFeedback) {
-      @Suppress("DEPRECATION") val flags =
-        HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING or HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+      @Suppress("DEPRECATION")
+      val flags = HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING or HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
       binding.overlayView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, flags)
     }
     setResult(Activity.RESULT_OK, Intent().apply {
@@ -209,6 +210,8 @@ internal class QRScannerActivity : AppCompatActivity() {
           finish()
         }
       }
+
+      if (it.keepScreenOn) window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
   }
 

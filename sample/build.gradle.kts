@@ -34,6 +34,19 @@ android {
     buildConfig = true
     viewBinding = true
   }
+  lint {
+    abortOnError = true
+    warningsAsErrors = true
+    checkDependencies = true
+    disable.addAll(
+      listOf(
+        "RtlEnabled",
+        "GradleDependency",
+        "AndroidGradlePluginVersion",
+        "OldTargetApi",
+      )
+    )
+  }
 }
 
 dependencies {

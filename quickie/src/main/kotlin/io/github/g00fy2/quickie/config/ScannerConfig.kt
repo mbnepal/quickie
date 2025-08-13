@@ -7,7 +7,7 @@ import androidx.annotation.StringRes
  * Builder for ScannerConfig used in ScanBarcode ActivityResultContract.
  */
 @Suppress("LongParameterList")
-public class ScannerConfig internal constructor(
+public class ScannerConfig(
   internal val formats: IntArray,
   internal val stringRes: Int,
   internal val drawableRes: Int?,
@@ -18,6 +18,7 @@ public class ScannerConfig internal constructor(
   internal val showCloseButton: Boolean,
   internal val scanFromFile: Boolean,
   internal val qrActionName: String,
+  internal val keepScreenOn: Boolean,
 ) {
 
   public class Builder {
@@ -31,6 +32,7 @@ public class ScannerConfig internal constructor(
     private var showCloseButton: Boolean = false
     private var scanFromFile: Boolean = false
     private var qrActionName: String= ""
+    private var keepScreenOn: Boolean = false
 
     /**
      * Set a list of interested barcode formats. List must not be empty.
@@ -76,6 +78,7 @@ public class ScannerConfig internal constructor(
     public fun setShowCloseButton(enable: Boolean): Builder = apply { showCloseButton = enable }
 
     /**
+<<<<<<< HEAD
      * Scan Qr from file instead.
      */
     public fun setScanFromFile(qrFromFile: Boolean): Builder = apply {
@@ -88,12 +91,18 @@ public class ScannerConfig internal constructor(
     public fun setQrActionName(actionName:String): Builder = apply {
       qrActionName = actionName
     }
+    /**
+     *  Keep the device's screen turned on as long as the scanner is visible.
+     */
+    public fun setKeepScreenOn(enable: Boolean): Builder = apply { keepScreenOn = enable }
+
 
     /**
      * Build the BarcodeConfig required by the ScanBarcode ActivityResultContract.
      */
     public fun build(): ScannerConfig =
       ScannerConfig(
+
         barcodeFormats.map { it.value }.toIntArray(),
         overlayStringRes,
         overlayDrawableRes,
@@ -103,7 +112,8 @@ public class ScannerConfig internal constructor(
         useFrontCamera,
         showCloseButton,
         scanFromFile,
-        qrActionName
+        qrActionName,
+        keepScreenOn = keepScreenOn,
       )
   }
 
